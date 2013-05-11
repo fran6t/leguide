@@ -1,0 +1,1 @@
+Voir le fichier guide-script.php pour les notes de version
