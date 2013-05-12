@@ -665,8 +665,13 @@ if(isset($_POST['valid_form']) || isset($_GET['auto'])){
 						$catrewrite=Category::getLinkRewrite($id_category_default, intval($id_lang));
 						//$url_article = $link->getProductLink($id_product,$link_rewrite,$catrewrite);
 						//Fran6t - 06/05/2013 recup de l'url dans $this->context
-						$url_article = $this->context->link->getProductLink($id_product,$link_rewrite,$catrewrite);						
-
+						// Fran6t - 12/05/2013 correction en cas de rewwrite de la boutique idealement ce serait de recup dans la config boutique si url rewriting ou pas
+						$_POST['url-rewriting']="yes";
+						if ($_POST['url-rewriting']=="yes"){
+						  $url_article = $article->f_url_article($url_site_base_prestashop, $link_rewrite, $id_product, $id_lang, $id_category_default);
+						} else {
+						  $url_article = $this->context->link->getProductLink($id_product,$link_rewrite,$catrewrite);						
+						}
 						// Url de l'image
 						//Fran6t - 06/05/2013 modif de la fonction f_url_image dans art_info.php
 						// et application de $this->context pour support nouveau rangement des images 
